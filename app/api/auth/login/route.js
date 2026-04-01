@@ -4,6 +4,14 @@ const { initDb } = require("../../../../lib/bootstrap");
 const { comparePassword, signStaffToken } = require("../../../../lib/auth");
 const { jsonError } = require("../../../../lib/requestAuth");
 
+function getSecureCookieFlag(request) {
+  if (process.env.COOKIE_SECURE === "true") return true;
+  if (process.env.COOKIE_SECURE === "false") return false;
+  const forwardedProto = request.headers.get("x-forwarded-proto");
+  if (forwardedProto) return forwardedProto.split(",")[0].trim() === "https";
+  return request.nextUrl.protocol === "https:";
+}
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -32,7 +40,7 @@ export async function POST(request) {
     response.cookies.set("staff_token", token, {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
+      secure: getSecureCookieFlag(request),
       path: "/",
       maxAge: 60 * 60 * 24 * 7,
     });

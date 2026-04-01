@@ -1,15 +1,19 @@
 import { create } from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Platform } from "react-native";
 
 const SERVER_URL_KEY = "staff_server_url";
+const DEPLOYED_SERVER_URL = "http://u133olebmptuq5bymoqwxnrr.103.108.220.202.sslip.io";
 
 function getDefaultServerUrl() {
-  if (Platform.OS === "web") {
-    const hostname = typeof window !== "undefined" ? window.location.hostname : "localhost";
-    return `http://${hostname}:3000`;
+  return DEPLOYED_SERVER_URL;
+}
+
+function normalizeServerUrl(serverUrl) {
+  if (!serverUrl) return DEPLOYED_SERVER_URL;
+  if (serverUrl.includes("localhost:3000") || serverUrl.includes("127.0.0.1:3000")) {
+    return DEPLOYED_SERVER_URL;
   }
-  return "http://u133olebmptuq5bymoqwxnrr.103.108.220.202.sslip.io";
+  return serverUrl;
 }
 
 export const useAppStore = create((set, get) => ({
@@ -19,8 +23,9 @@ export const useAppStore = create((set, get) => ({
   customerCart: [],
   setToken: (token) => set({ token }),
   setServerUrl: (serverUrl) => {
-    set({ serverUrl });
-    AsyncStorage.setItem(SERVER_URL_KEY, serverUrl).catch(() => {});
+    const normalizedUrl = normalizeServerUrl(serverUrl);
+    set({ serverUrl: normalizedUrl });
+    AsyncStorage.setItem(SERVER_URL_KEY, normalizedUrl).catch(() => {});
   },
   setCachedMenu: async (cachedMenu) => {
     set({ cachedMenu });
@@ -28,7 +33,13 @@ export const useAppStore = create((set, get) => ({
   },
   loadCache: async () => {
     const savedUrl = await AsyncStorage.getItem(SERVER_URL_KEY);
-    if (savedUrl) set({ serverUrl: savedUrl });
+    if (savedUrl) {
+      const normalizedUrl = normalizeServerUrl(savedUrl);
+      set({ serverUrl: normalizedUrl });
+      if (normalizedUrl !== savedUrl) {
+        AsyncStorage.setItem(SERVER_URL_KEY, normalizedUrl).catch(() => {});
+      }
+    }
     const raw = await AsyncStorage.getItem("cached_menu");
     if (raw) set({ cachedMenu: JSON.parse(raw) });
   },

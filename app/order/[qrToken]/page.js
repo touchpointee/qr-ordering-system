@@ -29,7 +29,8 @@ export default function CustomerOrderPage({ params }) {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [openSubcategoryId, setOpenSubcategoryId] = useState("");
   const [search, setSearch] = useState("");
-  const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:3000";
+  const socketUrl =
+    process.env.NEXT_PUBLIC_SOCKET_URL || "http://u133olebmptuq5bymoqwxnrr.103.108.220.202.sslip.io";
 
   const total = useMemo(
     () => cart.reduce((sum, item) => sum + Number(item.price) * Number(item.qty), 0),

@@ -12,7 +12,8 @@ const colorForStatus = {
 
 export default function KitchenPage({ params }) {
   const [kots, setKots] = useState([]);
-  const socketUrl = process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:3000";
+  const socketUrl =
+    process.env.NEXT_PUBLIC_SOCKET_URL || "http://u133olebmptuq5bymoqwxnrr.103.108.220.202.sslip.io";
 
   async function load() {
     const res = await fetch(`/api/kots?kitchenId=${params.kitchenId}&status=pending,printed,acknowledged`);
