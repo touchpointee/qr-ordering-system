@@ -12,6 +12,11 @@ const orderItemSchema = new mongoose.Schema(
       ref: "Section",
       required: true,
     },
+    kitchenId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Kitchen",
+      required: true,
+    },
     name: { type: String, required: true },
     price: { type: Number, required: true },
     qty: { type: Number, required: true, min: 1 },

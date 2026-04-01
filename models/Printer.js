@@ -9,7 +9,7 @@ const printerSchema = new mongoose.Schema(
       index: true,
     },
     name: { type: String, required: true, trim: true },
-    ipAddress: { type: String, required: true, trim: true },
+    ipAddress: { type: String, default: "", trim: true },
     port: { type: Number, default: 9100 },
     type: {
       type: String,

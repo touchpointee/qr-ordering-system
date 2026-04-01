@@ -10,6 +10,11 @@ const kitchenSchema = new mongoose.Schema(
     },
     name: { type: String, required: true, trim: true },
     description: { type: String, default: "" },
+    printerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Printer",
+      default: null,
+    },
   },
   { timestamps: true }
 );

@@ -1,4 +1,5 @@
 const User = require("../../../../models/User");
+const { NextResponse } = require("next/server");
 const { initDb } = require("../../../../lib/bootstrap");
 const { comparePassword, signStaffToken } = require("../../../../lib/auth");
 const { jsonError } = require("../../../../lib/requestAuth");
@@ -16,7 +17,7 @@ export async function POST(request) {
     if (!ok) return jsonError("Invalid credentials", 401);
 
     const token = signStaffToken(user);
-    const response = Response.json({
+    const response = NextResponse.json({
       token,
       user: {
         id: user._id,
@@ -28,10 +29,13 @@ export async function POST(request) {
       },
     });
 
-    response.headers.append(
-      "Set-Cookie",
-      `staff_token=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=604800`
-    );
+    response.cookies.set("staff_token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+    });
 
     return response;
   } catch (error) {

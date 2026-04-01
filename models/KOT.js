@@ -31,8 +31,9 @@ const kotSchema = new mongoose.Schema(
     sectionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Section",
-      required: true,
+      required: false,
       index: true,
+      default: null,
     },
     kitchenId: {
       type: mongoose.Schema.Types.ObjectId,
