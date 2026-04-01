@@ -9,7 +9,7 @@ function getDefaultServerUrl() {
     const hostname = typeof window !== "undefined" ? window.location.hostname : "localhost";
     return `http://${hostname}:3000`;
   }
-  return "http://localhost:3000";
+  return "http://u133olebmptuq5bymoqwxnrr.103.108.220.202.sslip.io";
 }
 
 export const useAppStore = create((set, get) => ({
