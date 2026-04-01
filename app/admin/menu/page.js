@@ -64,6 +64,15 @@ export default function MenuPage() {
     load();
   }
 
+  async function updateItemKitchen(id, kitchenId) {
+    await fetch(`/api/admin/menu/items/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ kitchenId: kitchenId || null }),
+    });
+    load();
+  }
+
   async function deleteItem(id) {
     await fetch(`/api/admin/menu/items/${id}`, { method: "DELETE" });
     load();
@@ -135,7 +144,21 @@ export default function MenuPage() {
                   {" | "}
                   Subcategory: {subcategoryMap[i.subcategoryId] || i.subcategoryId || "-"}
                   {" | "}
-                  Kitchen: {kitchenMap[i.kitchenId] || i.kitchenId}
+                  Kitchen: {kitchenMap[i.kitchenId] || i.kitchenId || "Not set"}
+                </div>
+                <div className="mt-2">
+                  <select
+                    className="admin-input text-xs"
+                    value={i.kitchenId || ""}
+                    onChange={(e) => updateItemKitchen(i._id, e.target.value)}
+                  >
+                    <option value="">Assign Kitchen</option>
+                    {kitchens.map((kitchen) => (
+                      <option key={kitchen._id} value={kitchen._id}>
+                        {kitchen.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   <button className={`rounded-xl px-3 py-1.5 text-xs text-white ${i.isAvailable ? "bg-amber-600" : "bg-emerald-600"}`} onClick={() => toggleItem(i._id)}>

@@ -28,5 +28,8 @@
     "socket.io-client": "^4.8.3",
     "zustand": "^5.0.12"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "eas-cli": "^18.4.0"
+  }
 }

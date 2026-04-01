@@ -386,7 +386,7 @@ export default function CustomerOrderPage({ params }) {
                                         ) : null}
                                       </div>
 
-                                      <div className="mt-auto flex items-end justify-between gap-3 pt-4">
+                                      <div className="mt-auto flex flex-col gap-3 pt-4 sm:flex-row sm:items-end sm:justify-between">
                                         <div>
                                           <p className="text-xs uppercase tracking-[0.22em] text-[#a28668]">
                                             Price
@@ -395,15 +395,15 @@ export default function CustomerOrderPage({ params }) {
                                             {formatMoney(item.price)}
                                           </p>
                                         </div>
-                                        <div className="flex gap-2">
+                                        <div className="flex w-full gap-2 sm:w-auto">
                                           <button
-                                            className="rounded-full border border-[#eadccb] bg-[#faf4ed] px-3 py-2 text-xs font-semibold text-[#6c5b47]"
+                                            className="flex-1 rounded-full border border-[#eadccb] bg-[#faf4ed] px-3 py-2 text-xs font-semibold text-[#6c5b47] sm:flex-none"
                                             onClick={() => openItemDetail(item)}
                                           >
                                             Details
                                           </button>
                                           <button
-                                            className="rounded-full bg-[#c96a2b] px-4 py-2 text-xs font-semibold text-white"
+                                            className="flex-1 rounded-full bg-[#c96a2b] px-4 py-2 text-xs font-semibold text-white sm:flex-none"
                                             onClick={() => addItem(item)}
                                           >
                                             Add now
@@ -645,7 +645,7 @@ export default function CustomerOrderPage({ params }) {
         ) : null}
       </div>
 
-      <nav className="fixed bottom-3 left-1/2 z-20 flex w-[calc(100%-1.5rem)] max-w-md -translate-x-1/2 items-center justify-between rounded-full border border-white/60 bg-white/90 px-2 py-2 shadow-[0_20px_60px_rgba(44,31,17,0.18)] backdrop-blur">
+      <nav className="fixed bottom-3 left-1/2 z-20 grid w-[calc(100%-1rem)] max-w-md -translate-x-1/2 grid-cols-3 items-center rounded-full border border-white/60 bg-white/90 px-1.5 py-1.5 shadow-[0_20px_60px_rgba(44,31,17,0.18)] backdrop-blur sm:w-[calc(100%-1.5rem)] sm:px-2 sm:py-2">
         {[
           { id: "menu", label: "Menu" },
           { id: "cart", label: "Cart" },
@@ -653,14 +653,14 @@ export default function CustomerOrderPage({ params }) {
         ].map((item) => (
           <button
             key={item.id}
-            className={`relative flex-1 rounded-full px-4 py-3 text-sm font-semibold transition ${
+            className={`relative min-w-0 rounded-full px-2 py-2 text-xs font-semibold transition sm:px-4 sm:py-3 sm:text-sm ${
               view === item.id ? "bg-[#221d17] text-white" : "text-[#6f665c]"
             }`}
             onClick={() => setView(item.id)}
           >
             {item.label}
             {item.id === "cart" && cartCount > 0 ? (
-              <span className="absolute right-2 top-1 rounded-full bg-[#c96a2b] px-1.5 py-0.5 text-[10px] font-bold text-white">
+              <span className="absolute right-1 top-0.5 rounded-full bg-[#c96a2b] px-1.5 py-0.5 text-[10px] font-bold text-white sm:right-2 sm:top-1">
                 {cartCount}
               </span>
             ) : null}
