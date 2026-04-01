@@ -37,7 +37,7 @@ export default function LoginScreen({ navigation }) {
     <Screen style={styles.screen}>
       <View style={styles.heroCard}>
         <View style={styles.heroBadge}>
-          <Text style={styles.heroBadgeText}>TP</Text>
+          <Text style={styles.heroBadgeText}>FB</Text>
         </View>
         <Text style={styles.eyebrow}>Staff Access</Text>
         <Heading style={styles.title}>Run the floor with clarity.</Heading>

@@ -33,7 +33,7 @@ export default function AdminLayout({ children }) {
       <div className="grid min-h-screen gap-0 md:grid-cols-[280px_1fr]">
         <aside className="admin-sidebar sticky top-0 h-screen rounded-none border-y-0 border-l-0 flex flex-col">
           <div className="mb-5 border-b border-slate-100 pb-4">
-            <h2 className="text-xl font-semibold tracking-tight text-slate-900">Touchpointe Admin</h2>
+            <h2 className="text-xl font-semibold tracking-tight text-slate-900">Food Book Admin</h2>
             <p className="mt-1 text-xs text-slate-500">Restaurant operations panel</p>
           </div>
           <nav className="space-y-1">
@@ -62,7 +62,7 @@ export default function AdminLayout({ children }) {
         </aside>
         <section className="space-y-4 p-4">
           <div className="admin-card flex items-center justify-between py-4">
-            <h1 className="text-lg font-semibold text-slate-900">Restaurant Control Center</h1>
+            <h1 className="text-lg font-semibold text-slate-900">Food Book Control Center</h1>
             <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">Live</span>
           </div>
           {children}

@@ -18,7 +18,7 @@ const { hashPassword } = require("../lib/auth");
 async function run() {
   await connectDB();
 
-  const restaurant = await Restaurant.create({ name: "Touchpointe Demo", address: "Main Street", isActive: true });
+  const restaurant = await Restaurant.create({ name: "Food Book", address: "Main Street", isActive: true });
   const printers = await Printer.insertMany([
     { restaurantId: restaurant._id, name: "Kitchen Printer 1", ipAddress: "192.168.1.100", port: 9100, type: "network" },
     { restaurantId: restaurant._id, name: "Kitchen Printer 2", ipAddress: "192.168.1.101", port: 9100, type: "network" },
@@ -62,7 +62,7 @@ async function run() {
   const adminPassword = "Admin@12345";
   const passwordHash = await hashPassword(adminPassword);
   const emailSuffix = restaurant._id.toString().slice(-6);
-  const adminEmail = `admin_${emailSuffix}@touchpointe.local`;
+  const adminEmail = `admin_${emailSuffix}@foodbook.local`;
   await User.create({
     restaurantId: restaurant._id,
     name: "Super Admin",

@@ -18,7 +18,7 @@ export default function SettingsScreen({ navigation }) {
 
       <Card style={styles.card}>
         <Text style={styles.label}>Server URL</Text>
-        <SubText style={styles.help}>Point the app at your active TouchPointe server.</SubText>
+        <SubText style={styles.help}>Point the app at your active Food Book server.</SubText>
         <AppInput value={serverUrl} onChangeText={setServerUrl} style={styles.input} autoCapitalize="none" />
         <AppButton
           title="Logout"
