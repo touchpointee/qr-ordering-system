@@ -1,0 +1,11 @@
+require("./Restaurant");
+require("./Kitchen");
+require("./Printer");
+require("./Section");
+require("./Table");
+require("./Category");
+require("./MenuItem");
+require("./OrderSession");
+require("./Order");
+require("./KOT");
+require("./User");
